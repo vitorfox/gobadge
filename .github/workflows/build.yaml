@@ -5,13 +5,31 @@ on:
     branches: master
 
 jobs:
-  login:
+  build:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Login to GitHub Container Registry
+      - name: checkout code
+        uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
           registry: docker.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_IO_TOKEN }}
+      - name: build arm7
+        run: |
+          docker build -t ${{ github.repository_name }}:latest \
+          --build-arg PLATFORM=linux --build-arg ARCH=arm --build-arg ARCH_VERSION=v7
+          --platform linux/arm/v7 .
+      - name: build amd64
+        run: |
+          docker build -t ${{ github.repository_name }}:latest \
+          --build-arg PLATFORM=linux --build-arg ARCH=amd64
+          --platform linux/amd64 .
+      - name: build arm64
+        run: |
+          docker build -t ${{ github.repository_name }}:latest \
+          --build-arg PLATFORM=linux --build-arg ARCH=arm64
+          --platform linux/arm64 .
+      - name: push the image
+        run: docker push ${{ github.repository_name }}:latest
