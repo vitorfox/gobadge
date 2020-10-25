@@ -19,17 +19,17 @@ jobs:
       - name: build arm7
         run: |
           docker build -t ${{ github.repository }}:latest \
-          --build-arg PLATFORM=linux --build-arg ARCH=arm --build-arg ARCH_VERSION=v7
+          --build-arg PLATFORM=linux --build-arg ARCH=arm --build-arg ARCH_VERSION=v7 \
           --platform linux/arm/v7 .
       - name: build amd64
         run: |
           docker build -t ${{ github.repository }}:latest \
-          --build-arg PLATFORM=linux --build-arg ARCH=amd64
+          --build-arg PLATFORM=linux --build-arg ARCH=amd64 \
           --platform linux/amd64 .
       - name: build arm64
         run: |
           docker build -t ${{ github.repository }}:latest \
-          --build-arg PLATFORM=linux --build-arg ARCH=arm64
+          --build-arg PLATFORM=linux --build-arg ARCH=arm64 \
           --platform linux/arm64 .
       - name: push the image
         run: docker push ${{ github.repository }}:latest
