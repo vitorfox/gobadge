@@ -1,4 +1,4 @@
-FROM --platform=linux/arm/v7 golang:alpine AS build
+FROM golang:alpine AS build
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm GOARM=7 go build -ldflags="-w -s" -a -installsuffix cgo -o gobadge
 
 FROM scratch
