@@ -32,9 +32,9 @@ jobs:
           -f Dockerfile.amd64 .
           docker push ${{ github.repository }}:manifest-latest-arm64
       - name: push the image
+        env:
+          DOCKER_CLI_EXPERIMENTAL: "enabled"
         run: |
-          echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
-          sudo service restart docker
           docker version -f '{{.Server.Experimental}}'
           docker manifest create \
           ${{ github.repository }}:latest \
