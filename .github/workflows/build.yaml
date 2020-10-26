@@ -16,6 +16,9 @@ jobs:
           registry: docker.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_IO_TOKEN }}
+      - name: qemu
+        run: |
+          docker run --rm --privileged multiarch/qemu-user-static:register --reset
       - name: build images
         env:
           DOCKER_CLI_EXPERIMENTAL: "enabled"
