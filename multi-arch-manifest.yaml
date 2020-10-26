@@ -1,0 +1,16 @@
+image: vitorfox/gobadge:latest
+manifests:
+  - image: vitorfox/gobadge:amd64
+    platform:
+      architecture: amd64
+      os: linux
+  - image: vitorfox/gobadge:arm32v7
+    platform:
+      architecture: arm
+      os: linux
+      variant: v7
+  - image: vitorfox/gobadge:arm64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8
