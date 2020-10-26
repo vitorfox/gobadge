@@ -24,7 +24,7 @@ jobs:
           DOCKER_CLI_EXPERIMENTAL: "enabled"
         run: |
           docker build -t ${{ github.repository }}:manifest-latest-arm7 \
-          -f Dockerfile.arm.7 .
+          --platform=linux/arm/7 -f Dockerfile.arm.7 .
           docker push ${{ github.repository }}:manifest-latest-arm7
           docker build -t ${{ github.repository }}:manifest-latest-amd64 \
           -f Dockerfile.arm64 .
