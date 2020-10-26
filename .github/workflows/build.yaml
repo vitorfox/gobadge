@@ -16,22 +16,20 @@ jobs:
           registry: docker.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_IO_TOKEN }}
-      - name: build arm7
+      - name: build images
+        env:
+          DOCKER_CLI_EXPERIMENTAL: "enabled"
         run: |
           docker build -t ${{ github.repository }}:manifest-latest-arm7 \
-          -f Dockerfile.arm.7 .
+          --platform=linux/arm/v7 -f Dockerfile.arm.7 .
           docker push ${{ github.repository }}:manifest-latest-arm7
-      - name: build amd64
-        run: |
           docker build -t ${{ github.repository }}:manifest-latest-amd64 \
-          -f Dockerfile.arm64 .
+          --platform=linux/amd64 -f Dockerfile.arm64 .
           docker push ${{ github.repository }}:manifest-latest-amd64
-      - name: build arm64
-        run: |
           docker build -t ${{ github.repository }}:manifest-latest-arm64 \
-          -f Dockerfile.amd64 .
+          --platform=linux/arm64 -f Dockerfile.amd64 .
           docker push ${{ github.repository }}:manifest-latest-arm64
-      - name: push the image
+      - name: push images
         env:
           DOCKER_CLI_EXPERIMENTAL: "enabled"
         run: |
