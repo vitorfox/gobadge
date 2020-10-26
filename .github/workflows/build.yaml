@@ -18,15 +18,24 @@ jobs:
           password: ${{ secrets.DOCKER_IO_TOKEN }}
       - name: build arm7
         run: |
-          docker build -t ${{ github.repository }}:latest \
+          docker build -t ${{ github.repository }}:manifest-latest-arm7 \
           -f Dockerfile.arm.7 .
+          docker push ${{ github.repository }}:manifest-latest-arm7
       - name: build amd64
         run: |
-          docker build -t ${{ github.repository }}:latest \
+          docker build -t ${{ github.repository }}:manifest-latest-amd64 \
           -f Dockerfile.arm64 .
+          docker push ${{ github.repository }}:manifest-latest-amd64
       - name: build arm64
         run: |
-          docker build -t ${{ github.repository }}:latest \
+          docker build -t ${{ github.repository }}:manifest-latest-arm64 \
           -f Dockerfile.amd64 .
+          docker push ${{ github.repository }}:manifest-latest-arm64
       - name: push the image
-        run: docker push ${{ github.repository }}:latest
+        run: |
+          docker manifest create \
+          ${{ github.repository }}:latest \
+          --amend ${{ github.repository }}:manifest-latest-amd64 \
+          --amend ${{ github.repository }}:manifest-latest-arm7 \
+          --amend ${{ github.repository }}:manifest-latest-arm64
+          docker manifest push ${{ github.repository }}:latest
