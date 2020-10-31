@@ -2,7 +2,7 @@ badges:
 - name: issues
   type: default
   logic: moreWorst
-  output: badges/issues.svg
+  output: badges_issues.svg
   values:
     value: ${ISSUES_COUNT}
     good: 5

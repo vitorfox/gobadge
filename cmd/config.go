@@ -15,6 +15,7 @@ type Config struct {
 	Name   string
 	Type   string
 	Logic  string
+	Output string
 	Values map[string]string
 }
 

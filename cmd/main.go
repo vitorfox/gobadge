@@ -6,6 +6,7 @@ import (
 
 	arg "github.com/alexflint/go-arg"
 	"github.com/vitorfox/gobadge/internal/badges"
+	"github.com/vitorfox/gobadge/package/svg"
 )
 
 type Args struct {
@@ -30,14 +31,22 @@ func main() {
 			panic(fmt.Sprintf("Invalid logic:%s\n", b.Logic))
 		}
 
+		var sa *svg.Node
+
 		switch b.Type {
 		case "default":
 			s := badges.NewDefault(b.Name)
-			sa := s.Build(logic.GetParams())
-			sa.Build(os.Stdout)
+			sa = s.Build(logic.GetParams())
 		default:
 			panic(fmt.Sprintf("Invalid type:%s\n", b.Type))
 		}
 
+		f, err := os.Create(b.Output)
+
+		if err != nil {
+			panic(err)
+		}
+
+		sa.Build(f)
 	}
 }
