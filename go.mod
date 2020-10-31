@@ -2,4 +2,10 @@ module github.com/vitorfox/gobadge
 
 go 1.13
 
-require github.com/ajstarks/svgo v0.0.0-20200725142600-7a3c8b57fecb
+require (
+	github.com/alexflint/go-arg v1.3.0
+	github.com/kr/pretty v0.1.0 // indirect
+	github.com/stretchr/testify v1.3.0 // indirect
+	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
+	gopkg.in/yaml.v2 v2.3.0
+)

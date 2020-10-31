@@ -1,0 +1,16 @@
+badges:
+- name: issues
+  type: default
+  logic: moreWorst
+  output: badges/issues.svg
+  values:
+    value: ${ISSUES_COUNT}
+    good: 5
+    bad: 30
+    goodBackgroundColor: "#4c1"
+    badBackgroundColor: "#e05d44"
+    warningBackgroundColor: "#dfb317"
+    goodTextColor: white
+    badTextColor: white
+    warningTextColor: white
+  
