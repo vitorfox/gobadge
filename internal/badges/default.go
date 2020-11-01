@@ -38,7 +38,11 @@ func (d *Default) Build(params map[string]string) *svg.Node {
 	pathP2 := fmt.Sprintf("M%s 0 h%s v20 H%s z", nameSizeS, valueSizeS, nameSizeS)
 	pathP3 := fmt.Sprintf("M0 0 h%s v20 H0 z", totalSizeS)
 
-	s := svg.New(svg.String("width", totalSizeS), svg.String("height", "20"))
+	s := svg.New(
+		svg.String("xmlns", "http://www.w3.org/2000/svg"),
+		svg.String("xmlns:xlink", "http://www.w3.org/1999/xlink"),
+		svg.String("width", totalSizeS), svg.String("height", "20"),
+	)
 	lg := s.Add("linearGradient",
 		svg.String("id", "b"),
 		svg.String("x2", "0"),
